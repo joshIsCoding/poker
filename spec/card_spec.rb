@@ -10,6 +10,12 @@ describe Card do
          expect(ace_spades.type).to eq(:A)
 
       end
+
+      it "raises an error for invalid card values" do
+         expect{Card.new(:forks, :J)}.to raise_error
+         expect{Card.new(:clubs, :E)}.to raise_error
+      end
+
    end
 
    describe "Card#to_s" do 
