@@ -18,6 +18,32 @@ describe Card do
 
    end
 
+   describe "#<=>" do
+      subject(:3_clubs) {Card.new(:clubs, 3)}
+      let(:3_hearts) {Card.new(:hearts, 3)}
+      let(:7_clubs) {Card.new(:hearts, 7)}
+      it "returns 1 for higher value cards of the same suit" do
+         expect(7_clubs <=> 3_clubs).to eq(1)
+      end
+
+      it "returns 1 for higher suited cards of the same value" do
+         expect(3_hearts <=> 3_clubs).to eq(1)
+      end
+
+      it "returns -1 for lower value cards of the same suit" do
+         expect(3_clubs <=> 7_clubs).to eq(-1)
+      end
+
+      it "returns 1 for lower suited cards of the same value" do
+         expect(3_clubs <=> 3_hearts).to eq(-1)
+      end
+
+      it "returns 0 for cards of equal suit and value" do
+         expect(3_clubs <=> 3_clubs.dup).to eq(0)
+      end
+
+   end
+
    describe "Card#to_s" do 
       it "returns the correct unicode suit and value for each card" do
          expect(ace_spades.to_s).to eq("A♤")
