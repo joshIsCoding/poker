@@ -12,8 +12,8 @@ describe Card do
       end
 
       it "raises an error for invalid card values" do
-         expect{Card.new(:forks, :J)}.to raise_error
-         expect{Card.new(:clubs, :E)}.to raise_error
+         expect{Card.new(:forks, :J)}.to raise_error(Argument_error)
+         expect{Card.new(:clubs, :E)}.to raise_error(Argument_error)
       end
 
    end
