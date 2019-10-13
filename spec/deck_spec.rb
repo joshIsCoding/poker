@@ -9,7 +9,7 @@ describe Deck do
          double(:value => 5, :suit => :hearts),
          double(:value => 10, :suit => :clubs),
          double(:value => :A, :suit => :spades),
-         double(:value => :J, :suit => :hearts),
+         double(:value => :J, :suit => :hearts)
       ]
    end
 
