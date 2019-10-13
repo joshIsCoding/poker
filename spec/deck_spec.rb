@@ -4,10 +4,7 @@ require 'rspec'
 describe Deck do
    subject(:test_deck) { Deck.new }
    let(:all_cards) { cards = test_deck.cards }
-   
-
-   describe "#initialize" do
-      let(:custom_deck_arr) do
+   let(:custom_deck_arr) do
       [
          double(:value => 5, :suit => :hearts),
          double(:value => 10, :suit => :clubs),
@@ -15,6 +12,10 @@ describe Deck do
          double(:value => :J, :suit => :hearts),
       ]
    end
+
+   describe "#initialize" do
+      
+   
       it "Creates an array of a full set of playing cards" do
          expect(all_cards.count).to eq(52)
          expect(all_cards.uniq).to eq(all_cards)
@@ -44,10 +45,35 @@ describe Deck do
    end
 
    describe "#take_back" do
-      let(:card_1) {double(:value => 4, :suit => :diamonds)}
-      it "Adds the argument card to the deck"
+      let (:small_deck) { Deck.new(custom_deck_arr)}
+      let(:card_1) {double(:value => 6, :suit => :diamonds)}
+      let(:cards_arr) { [double(:value => 2, :suit => :hearts), double(:value => 3, :suit => :hearts), double(:value => 4, :suit => :hearts)]}
+      
+      it "Adds the argument card to the deck" do
+         small_deck.take_back([card_1])
+         expect(small_deck.cards).to include(card_1)
+         expect(small_deck.cards.count).to eq(5)
 
-      it "Does not put the card at the top of the deck"
+      end
+
+      it "Adds multiple cards to the deck" do
+         small_deck.take_back(cards_arr)
+         expect(small_deck.cards.count).to eq(7)
+         expect(small_deck.cards).to include(cards_arr[0])
+         expect(small_deck.cards).to include(cards_arr[1])
+         expect(small_deck.cards).to include(cards_arr[2])
+      end
+
+
+
+
+      it "Does not put the card at the top of the deck" do
+         small_deck.take_back([card_1])
+         expect(small_deck.give(1)).to_not be(card_1)
+         small_deck.give(3)
+         expect(small_deck.cards.give(1)).to be(card_1)
+      end
+
 
    end
 
