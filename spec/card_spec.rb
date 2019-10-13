@@ -34,7 +34,7 @@ describe Card do
          expect(three_clubs <=> seven_clubs).to eq(-1)
       end
 
-      it "returns 1 for lower suited cards of the same value" do
+      it "returns -1 for lower suited cards of the same value" do
          expect(three_clubs <=> three_hearts).to eq(-1)
       end
 
