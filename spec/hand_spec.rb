@@ -26,12 +26,17 @@ describe Hand do
    end
    
    describe "#discard" do
+      let(:discard_hand) { Hand.new(no_pair_hand) }
+      let(:targets) { [0, 2, 3]}
 
-      it "Takes an array of the target indices as an argument"
+      it "Returns cards based on an argument array of the target indices" do
+         expect(discard_hand.discard(targets)).to include(no_pair_hand[0], no_pair_hand[2], no_pair_hand[3])
+      end
 
-      it "Returns the target cards"
-
-      it "Removes the cards from the hand"
+      it "Removes the cards from the hand" do
+         discard_hand.discard(targets)
+         expect(discard_hand.cards).to_not include(no_pair_hand[0], no_pair_hand[2], no_pair_hand[3])
+      end
 
    end
 
@@ -50,6 +55,20 @@ describe Hand do
       it "Returns a symbol representing the type of poker hand possible from the available cards"
 
       it "Correctly identifies the strongest possible hand when several types are possible"
+
+   end
+
+   describe "#<=>" do
+
+      it "Returns 1 for hands of higher rank"
+
+      it "Returns -1 for hands of lower rank"
+
+      it "Returns 0 for identical hands"
+   end
+
+   describe "::winning_hand" do
+      it "Returns the winning hand from an array of input hands"
 
    end
 
