@@ -25,7 +25,32 @@ describe Hand do
       end
    end
    
+   describe "#discard" do
 
+      it "Takes an array of the target indices as an argument"
 
+      it "Returns the target cards"
+
+      it "Removes the cards from the hand"
+
+   end
+
+   describe "#receive" do
+
+      it "Accepts an array of cards as argument"
+
+      it "Adds the cards to the hand"
+
+      it "Raises an error if the new hand were to exceed 5 cards"
+
+   end
+
+   describe "#best_hand" do
+
+      it "Returns a symbol representing the type of poker hand possible from the available cards"
+
+      it "Correctly identifies the strongest possible hand when several types are possible"
+
+   end
 
 end
