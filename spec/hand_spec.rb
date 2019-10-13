@@ -13,10 +13,16 @@ describe Hand do
    end
 
    describe "#initialize" do
-      new_hand = Hand.new(no_pair_hand)
-      it "Takes an array of cards and creates a hand"
+      
+      it "Takes an array of cards and creates a hand"  do
+         new_hand = Hand.new(no_pair_hand)
+         expect(new_hand.cards.count).to eq(5)
+      end
 
-      it "Raises an error unless 5 cards are provided" 
+      it "Raises an error unless 5 cards are provided" do
+         reduced_hand = no_pair_hand[0..2]
+         expect(Hand.new(reduced_hand)).to raise_error("Insufficient cards to initialize hand")
+      end
    end
    
 
