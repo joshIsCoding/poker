@@ -89,7 +89,11 @@ describe Deck do
    end
 
    describe "#deal_hand" do 
-      it "deals 5 cards from the deck" 
+      it "deals 5 cards from the deck" do
+         hand = test_deck.deal_hand
+         expect(hand.count).to eq(5)
+         expect(test_deck.cards.count).to eq(47)
+      end
    end
 
 
