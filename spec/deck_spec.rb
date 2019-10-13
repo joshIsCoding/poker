@@ -77,9 +77,14 @@ describe Deck do
 
    end
 
-   describe "#shuffle" do
+   describe "#shuffle!" do
+      let(:ordered_cards) { test_deck.cards.dup }
       
-      it "Shuffles the deck"
+      it "Shuffles the deck" do
+         test_deck.shuffle!
+         expect(test_deck.cards).to_not eq(ordered_cards)
+         expect(test_deck.cards.count).to eq(ordered_cards.count)
+      end
 
    end
 
