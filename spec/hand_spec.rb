@@ -41,12 +41,31 @@ describe Hand do
    end
 
    describe "#receive" do
+      let(:two_cards_short) do
+         receive = Hand.new(no_pair_hand)
+         receive.discard([1,4])
+      end
 
-      it "Accepts an array of cards as argument"
+      let(:one_new_card) { double(:value => :J, :suit => :hearts) }
 
-      it "Adds the cards to the hand"
+      let(:two_new_cards) do
+         [ 
+            double(:value => :A, :suit => :diamonds),
+            double(:value => :K, :suit => :diamonds)
+         ]
+      end
 
-      it "Raises an error if the new hand were to exceed 5 cards"
+
+      it "Adds the cards present in the argument array to the hand" do
+         full_hand = two_cards_short.receive(two_new_cards)
+         expect(full_hand).to include(*two_new_cards)
+      end
+
+      it "Raises an error if the new hand were to fall short of or exceed 5 cards" do
+         expect(two_cards_short.receive(one_new_card)).to raise_error("Incomplete hand")
+         expect(two_cards_short.receive(one_new_card + two_new_cards)).to raise_error("Incomplete hand")
+      end
+
 
    end
 
