@@ -18,7 +18,7 @@ describe Deck do
    
       it "Creates an array of a full set of playing cards" do
          expect(all_cards.count).to eq(52)
-         expect(all_cards.uniq).to eq(all_cards)
+         expect(all_cards.map{ |card| [card.value, card.suit] }.uniq.count).to eq(all_cards.count)
       end
 
       it "Accepts a custom deck of cards as an argument" do
@@ -34,7 +34,7 @@ describe Deck do
 
       it "Removes the cards from the deck with each deal" do
          removed = test_deck.give(1)
-         expect(test_deck).not_to include(removed)
+         expect(test_deck.cards).not_to include(removed)
          expect(test_deck.cards.count).to eq(51)
 
       end
@@ -45,7 +45,7 @@ describe Deck do
    end
 
    describe "#take_back" do
-      let (:small_deck) { Deck.new(custom_deck_arr)}
+      let(:small_deck) { Deck.new(custom_deck_arr)}
       let(:card_1) {double(:value => 6, :suit => :diamonds)}
       let(:cards_arr) { [double(:value => 2, :suit => :hearts), double(:value => 3, :suit => :hearts), double(:value => 4, :suit => :hearts)]}
       
@@ -78,7 +78,7 @@ describe Deck do
    end
 
    describe "#shuffle!" do
-      let(:ordered_cards) { test_deck.cards.dup }
+      let(:ordered_cards) { all_cards.dup }
       
       it "Shuffles the deck" do
          test_deck.shuffle!
