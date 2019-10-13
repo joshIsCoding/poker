@@ -70,7 +70,7 @@ describe Deck do
       it "Does not put the card at the top of the deck" do
          small_deck.take_back([card_1])
          expect(small_deck.give(1)).to_not be(card_1)
-         small_deck.give(3)
+         small_deck.give(3) #give away all but the newly returned card
          expect(small_deck.cards.give(1)).to be(card_1)
       end
 
@@ -92,7 +92,7 @@ describe Deck do
       it "deals 5 cards from the deck" do
          hand = test_deck.deal_hand
          expect(hand.count).to eq(5)
-         expect(test_deck.cards.count).to eq(47)
+         expect{test_deck.deal_hand}.to change{test_deck.cards.count}.by(-5)
       end
    end
 
